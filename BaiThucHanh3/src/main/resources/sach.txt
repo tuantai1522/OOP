@@ -1,0 +1,50 @@
+Dune
+Science fiction novel by Frank Herbert
+Ace Books
+12.99
+688
+To Kill a Mockingbird
+A novel by Harper Lee
+J.B. Lippincott & Co.
+15.00
+336
+1984
+A dystopian novel by George Orwell
+Penguin Books
+9.99
+328
+The Great Gatsby
+Novel by F. Scott Fitzgerald
+Scribner
+10.50
+180
+Harry Potter and the Sorcerer's Stone
+Fantasy novel by J.K. Rowling
+Scholastic
+8.99
+309
+The Catcher in the Rye
+Novel by J.D. Salinger
+Little, Brown and Company
+7.99
+224
+The Lord of the Rings
+Epic high-fantasy novel by J.R.R. Tolkien
+Allen & Unwin
+18.99
+1178
+Pride and Prejudice
+Novel by Jane Austen
+Thomas Egerton
+9.75
+279
+The Hobbit
+Fantasy novel by J.R.R. Tolkien
+Allen & Unwin
+14.99
+310
+The Chronicles of Narnia
+Series of seven fantasy novels by C.S. Lewis
+Geoffrey Bles
+29.99
+767
