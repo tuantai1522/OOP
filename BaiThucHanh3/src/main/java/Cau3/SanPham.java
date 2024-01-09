@@ -2,50 +2,57 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Cau3;
+package com.btt.bai3;
 
 import java.util.Scanner;
 
 /**
  *
- * @author HP
+ * @author admin
  */
 public class SanPham {
 
     private static int dem = 0;
-    private int maSanPham;
+    private int id = ++dem;
     private String tenSanPham;
-    private String moTaSanPham;
-    private String nhaSanXuat;
-    private double giaBan;
+    private double giaSanPham;
 
-    {
-        dem++;
-        setMaSanPham(dem);
+    public SanPham() {
     }
+
     
-    public SanPham(){
-        
-    }
-    public SanPham(String tenSanPham, String moTaSanPham, String nhaSanXuat, double giaBan) {
+    public SanPham(String tenSanPham, double giaSanPham) {
         this.tenSanPham = tenSanPham;
-        this.moTaSanPham = moTaSanPham;
-        this.nhaSanXuat = nhaSanXuat;
-        this.giaBan = giaBan;
+        this.giaSanPham = giaSanPham;
+    }
+
+    
+    /**
+     * @return the dem
+     */
+    public static int getDem() {
+        return dem;
     }
 
     /**
-     * @return the maSanPham
+     * @param aDem the dem to set
      */
-    public int getMaSanPham() {
-        return maSanPham;
+    public static void setDem(int aDem) {
+        dem = aDem;
     }
 
     /**
-     * @param maSanPham the maSanPham to set
+     * @return the id
      */
-    public void setMaSanPham(int maSanPham) {
-        this.maSanPham = maSanPham;
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**
@@ -63,64 +70,28 @@ public class SanPham {
     }
 
     /**
-     * @return the moTaSanPham
+     * @return the giaSanPham
      */
-    public String getMoTaSanPham() {
-        return moTaSanPham;
+    public double getGiaSanPham() {
+        return giaSanPham;
     }
 
     /**
-     * @param moTaSanPham the moTaSanPham to set
+     * @param giaSanPham the giaSanPham to set
      */
-    public void setMoTaSanPham(String moTaSanPham) {
-        this.moTaSanPham = moTaSanPham;
+    public void setGiaSanPham(double giaSanPham) {
+        this.giaSanPham = giaSanPham;
     }
 
-    /**
-     * @return the nhaSanXuat
-     */
-    public String getNhaSanXuat() {
-        return nhaSanXuat;
-    }
-
-    /**
-     * @param nhaSanXuat the nhaSanXuat to set
-     */
-    public void setNhaSanXuat(String nhaSanXuat) {
-        this.nhaSanXuat = nhaSanXuat;
-    }
-
-    /**
-     * @return the giaBan
-     */
-    public double getGiaBan() {
-        return giaBan;
-    }
-
-    /**
-     * @param giaBan the giaBan to set
-     */
-    public void setGiaBan(double giaBan) {
-        this.giaBan = giaBan;
-    }
-
-    public void nhapSanPham() {
+    public void nhap() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhap ten san pham: ");
+        System.out.print("\nNhap ten san pham: ");
         this.tenSanPham = sc.nextLine();
-
-        System.out.print("Nhap mo ta san pham: ");
-        this.moTaSanPham = sc.nextLine();
-
-        System.out.print("Nhap nha san xuat: ");
-        this.nhaSanXuat = sc.nextLine();
-
-        System.out.print("Nhap gia ban: ");
-        this.giaBan = Double.parseDouble(sc.nextLine());
-    }
-    
-    public void xuatSanPham(){
-        System.out.printf("\n- Ma SP: %d\n- Ten SP: %s\n- Gia SP: %.2f", this.maSanPham, this.tenSanPham, this.giaBan);
+        System.out.print("\nNhap gia san pham: ");
+        this.giaSanPham = Double.parseDouble(sc.nextLine());
     }
 
+    public void xuat() {
+        System.out.printf("\n %d - %s - %.2f", this.id, this.tenSanPham, this.giaSanPham);
+    }
 }

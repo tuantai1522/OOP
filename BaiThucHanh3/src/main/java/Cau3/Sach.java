@@ -2,24 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Cau3;
+package com.btt.bai3;
 
 import java.util.Scanner;
 
 /**
  *
- * @author HP
+ * @author admin
  */
 public class Sach extends SanPham {
 
     private int soTrang;
 
     public Sach() {
-
     }
+    
 
-    public Sach(String tenSanPham, String moTaSanPham, String nhaSanXuat, double giaBan, int soTrang) {
-        super(tenSanPham, moTaSanPham, nhaSanXuat, giaBan);
+    public Sach(String tenSanPham, double giaSanPham, int soTrang) {
+        super(tenSanPham, giaSanPham);
         this.soTrang = soTrang;
     }
 
@@ -38,17 +38,16 @@ public class Sach extends SanPham {
     }
 
     @Override
-    public void nhapSanPham() {
-        super.nhapSanPham();
+    public void nhap() {
+        super.nhap();
         Scanner sc = new Scanner(System.in);
-
-        System.out.print("Nhap so trang: ");
+        System.out.print("\nNhap so trang san pham: ");
         this.soTrang = Integer.parseInt(sc.nextLine());
     }
 
     @Override
-    public void xuatSanPham() {
-        super.xuatSanPham();
-        System.out.printf("\n- So trang: %d\n----------", this.soTrang);
+    public void xuat() {
+        super.xuat();
+        System.out.printf(" - %d", this.soTrang);
     }
 }

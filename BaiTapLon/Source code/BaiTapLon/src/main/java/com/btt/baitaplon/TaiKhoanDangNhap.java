@@ -19,7 +19,7 @@ public class TaiKhoanDangNhap {
         return passWord;
     }
 
-    public void setPassWord(String passWord) {
+    public void doiPassWord(String passWord) {
         this.passWord = passWord;
     }
 

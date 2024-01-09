@@ -4,11 +4,9 @@
  */
 package com.btt.baitaplon;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 /**
  *
@@ -29,14 +27,29 @@ public abstract class TaiKhoan {
 
     @Override
     public String toString() {
-        return String.format("%s - %.2f - %.3f - %s",
+        return String.format("%s - %.3f - %.1f%% - %s",
                 this.ten,
                 this.soTienGui,
-                this.laiSuat,
+                this.laiSuat * 100,
                 this.ngayGui.format(DateTimeFormatter.ofPattern(CauHinh.DATE_FORMAT)));
     }
 
+    public String getTen() {
+        return this.ten;
+    }
+
     public double getSoTienGui() {
-        return soTienGui;
+        return this.soTienGui;
+    }
+
+    public LocalDate getNgayGui() {
+        return this.ngayGui;
+    }
+
+    public double tinhTienLai() {
+        long soNgayGui = this.ngayGui.until(LocalDate.now(), ChronoUnit.DAYS);
+        double laiSuatNgay = this.laiSuat / 365.0;
+
+        return this.soTienGui * laiSuatNgay * soNgayGui;
     }
 }

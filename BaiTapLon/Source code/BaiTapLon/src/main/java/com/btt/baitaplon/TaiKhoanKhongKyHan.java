@@ -10,6 +10,7 @@ public class TaiKhoanKhongKyHan extends TaiKhoan {
         this.ngayGui = LocalDate.now();
     }
 
+    // Dùng cho việc ghi File    
     public TaiKhoanKhongKyHan(double soTienGui, String ngayGui) {
         super("TaiKhoanKhongKyHan", CauHinh.LAI_SUAT_KHONG_KY_HAN, soTienGui);
         this.ngayGui = LocalDate.parse(ngayGui, DateTimeFormatter.ofPattern(CauHinh.DATE_FORMAT));
