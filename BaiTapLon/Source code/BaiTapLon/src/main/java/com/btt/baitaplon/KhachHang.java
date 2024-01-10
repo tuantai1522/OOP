@@ -90,6 +90,7 @@ public class KhachHang {
 
         return res.toString();
     }
+    
 
     public void moTaiKhoan(TaiKhoan tk) {
         this.DanhSachTaiKhoan.add(tk);
@@ -119,19 +120,19 @@ public class KhachHang {
             NoSuchMethodException, InstantiationException,
             IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
-        String[] khInFo = data.split(" - ");
+        String[] khachHangInFo = data.split(" - ");
 
         // Tạo khách hàng từ các phần của chuỗi được cắt ra
-        this.setMaSoTaiKhoan(khInFo[0]);
-        this.setHoTen(khInFo[1]);
-        this.setGioiTinh(khInFo[2]);
-        this.setNgaySinh(LocalDate.parse(khInFo[3], DateTimeFormatter.ofPattern(CauHinh.DATE_FORMAT)));
-        this.setQueQuan(khInFo[4]);
-        this.setSoCCCD(khInFo[5]);
+        this.setMaSoTaiKhoan(khachHangInFo[0]);
+        this.setHoTen(khachHangInFo[1]);
+        this.setGioiTinh(khachHangInFo[2]);
+        this.setNgaySinh(LocalDate.parse(khachHangInFo[3], DateTimeFormatter.ofPattern(CauHinh.DATE_FORMAT)));
+        this.setQueQuan(khachHangInFo[4]);
+        this.setSoCCCD(khachHangInFo[5]);
 
         // Thêm thông tin tài khoản vào danh sách tài khoản của khách hàng
-        for (int i = 6; i < khInFo.length; i++) {
-            String[] tkInfo = khInFo[i].split(",");
+        for (int i = 6; i < khachHangInFo.length; i++) {
+            String[] tkInfo = khachHangInFo[i].split(",");
 
             String loaiTK = tkInfo[0];
             double soTienGui = Double.parseDouble(tkInfo[1]);

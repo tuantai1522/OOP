@@ -12,6 +12,7 @@ public class Tester {
     public static void main(String[] args) throws Exception {
         NganHang nh = new NganHang();
         nh.docDanhSachKhachHang();
+        nh.docDanhSachDangNhap();
 
         int choice;
         do {
@@ -29,14 +30,20 @@ public class Tester {
                         nh.lamViecVoiGiaoDienAdmin();
                     }
                     case 2 -> {
-                        KhachHang kh = new KhachHang(
-                                "060120020001",
-                                "Nguyen Van A",
-                                "07/08/2003",
-                                "Tay Ninh",
-                                "079202002201"
-                        );
-                        nh.lamViecVoiGiaoDienKhachHang(kh);
+                        String userName;
+                        String passWord;
+                        System.out.print("\nNhap username (ma so tai khoan): ");
+                        userName = CauHinh.sc.nextLine();
+                        System.out.print("\nNhap pass word: ");
+                        passWord = CauHinh.sc.nextLine();
+
+                        if (nh.isDangNhapHopLe(userName, passWord)) {
+                            KhachHang kh = nh.layKhachHangDuaTrenMaSo(userName);
+                            nh.lamViecVoiGiaoDienKhachHang(kh);
+                        }else{
+                            System.out.println("Ten dang nhap hoac mat khau khong dung");
+                        }
+
                     }
                     case 3 -> {
                         System.out.println("Xin chao va hen gap lai.");
