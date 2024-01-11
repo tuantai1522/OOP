@@ -42,6 +42,14 @@ public class KhachHang {
 
     }
 
+    {
+        this.maSoTaiKhoan = String.format("%02d%02d%02d%04d",
+                LocalDate.now().getDayOfMonth(),
+                LocalDate.now().getMonthValue(),
+                LocalDate.now().getYear(),
+                dem++);
+    }
+
     // Dùng cho việc ghi File
     public KhachHang(String maSoTaiKhoan, String hoTen, String gioiTinh, String ngaySinh, String queQuan, String soCCCD) {
         this.maSoTaiKhoan = maSoTaiKhoan;
@@ -53,11 +61,7 @@ public class KhachHang {
     }
 
     public KhachHang(String hoTen, String gioiTinh, String ngaySinh, String queQuan, String soCCCD) {
-        this.maSoTaiKhoan = String.format("%02d%02d%02d%04d",
-                LocalDate.now().getDayOfMonth(),
-                LocalDate.now().getMonthValue(),
-                LocalDate.now().getYear(),
-                dem++);
+
         this.hoTen = hoTen;
         this.gioiTinh = gioiTinh;
         this.ngaySinh = LocalDate.parse(ngaySinh, DateTimeFormatter.ofPattern(CauHinh.DATE_FORMAT));
@@ -66,6 +70,7 @@ public class KhachHang {
     }
 
     public void nhapKhachHang() {
+
         System.out.print("\nNhap ho ten: ");
         this.hoTen = CauHinh.sc.nextLine();
         System.out.print("\nNhap gioi tinh: ");
@@ -75,22 +80,22 @@ public class KhachHang {
         System.out.print("\nNhap que quan: ");
         this.queQuan = CauHinh.sc.nextLine();
         System.out.print("\nNhap so CCCD: ");
-        this.queQuan = CauHinh.sc.nextLine();
+        this.soCCCD = CauHinh.sc.nextLine();
     }
 
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
+        res.append("\n");
         res.append(String.format("\n%s - %s - %s", this.maSoTaiKhoan, this.hoTen, this.gioiTinh));
         this.DanhSachTaiKhoan.forEach(x -> {
-            res.append("\n\t+ ").append(x.toString());
+            res.append(x.toString());
         });
         res.append(String.format("\n\t+ Tong tien gui: %.3f", this.tinhTongTienGui()));
         res.append(String.format("\n\t+ Tong tien lai: %.3f", this.tinhToanBoTienLai()));
 
         return res.toString();
     }
-    
 
     public void moTaiKhoan(TaiKhoan tk) {
         this.DanhSachTaiKhoan.add(tk);
@@ -247,4 +252,5 @@ public class KhachHang {
     public void setDanhSachTaiKhoan(List<TaiKhoan> DanhSachTaiKhoan) {
         this.DanhSachTaiKhoan = DanhSachTaiKhoan;
     }
+
 }

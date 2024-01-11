@@ -14,7 +14,7 @@ public class TaiKhoanDangNhap {
 
     
     public TaiKhoanDangNhap(String userName) {
-        this.userName = userName + String.format("%04d", dem++);
+        this.userName = userName;
         this.passWord = String.format("%06d", CauHinh.random.nextInt(999999) + 1);
     }
 

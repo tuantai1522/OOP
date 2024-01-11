@@ -27,7 +27,7 @@ public abstract class TaiKhoan {
 
     @Override
     public String toString() {
-        return String.format("%s - %.3f - %.1f%% - %s",
+        return String.format("\n%s - %.3f - %.1f%% - %s",
                 this.ten,
                 this.soTienGui,
                 this.laiSuat * 100,

@@ -47,7 +47,6 @@ public class Tester {
                     }
                     case 3 -> {
                         System.out.println("Xin chao va hen gap lai.");
-                        break;
                     }
                     default ->
                         System.out.println("Lua chon khong hop le. Hay nhap lai.");
