@@ -5,6 +5,8 @@
 package com.btt.baitaplon;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -32,6 +34,16 @@ public class CauHinh {
     public static final String TAI_KHOAN_DANG_NHAP_FILE_PATH = "src/main/resources/TaiKhoanDangNhap.txt";
     public static final String MAIN_FILE_PATH = "com.btt.baitaplon.";
 
-    
+    //Khởi tạo dùng để mở tài khoản cho KhachHang
+    public static final Map<Integer, String> mapToCreateTaiKhoan;
+
+    static {
+        mapToCreateTaiKhoan = new HashMap<>();
+        mapToCreateTaiKhoan.put(1, "TKKyHan1Tuan");
+        mapToCreateTaiKhoan.put(2, "TKKyHan1Thang");
+        mapToCreateTaiKhoan.put(3, "TKKyHan6Thang");
+        mapToCreateTaiKhoan.put(4, "TKKyHan12Thang");
+
+    }
 
 }

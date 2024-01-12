@@ -11,9 +11,16 @@ public class TaiKhoanKhongKyHan extends TaiKhoan {
     }
 
     // Dùng cho việc ghi File    
-    public TaiKhoanKhongKyHan(double soTienGui, String ngayGui) {
-        super("TaiKhoanKhongKyHan", CauHinh.LAI_SUAT_KHONG_KY_HAN, soTienGui);
+    public TaiKhoanKhongKyHan(int maTaiKhoan, double soTienGui, String ngayGui) {
+        super(maTaiKhoan, "TaiKhoanKhongKyHan", CauHinh.LAI_SUAT_KHONG_KY_HAN, soTienGui);
         this.ngayGui = LocalDate.parse(ngayGui, DateTimeFormatter.ofPattern(CauHinh.DATE_FORMAT));
     }
+
+    @Override
+    public LocalDate tinhNgayDaoHan() {
+        return LocalDate.now();
+    }
+    
+    
 
 }

@@ -12,8 +12,8 @@ public class TKKyHan6Thang extends TaiKhoan implements DaoHan {
     }
 
     // Dùng cho việc ghi File    
-    public TKKyHan6Thang(double soTienGui, String ngayGui) {
-        super("TKKyHan6Thang", CauHinh.LAI_SUAT_6_THANG, soTienGui);
+    public TKKyHan6Thang(int maTaiKhoan, double soTienGui, String ngayGui) {
+        super(maTaiKhoan, "TKKyHan6Thang", CauHinh.LAI_SUAT_6_THANG, soTienGui);
         this.ngayGui = LocalDate.parse(ngayGui, DateTimeFormatter.ofPattern(CauHinh.DATE_FORMAT));
 
     }

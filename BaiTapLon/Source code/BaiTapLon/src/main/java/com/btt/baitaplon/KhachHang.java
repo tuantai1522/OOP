@@ -11,6 +11,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -38,16 +39,16 @@ public class KhachHang {
 
     private List<TaiKhoan> DanhSachTaiKhoan = new ArrayList<>();
 
-    public KhachHang() {
-
-    }
-
     {
         this.maSoTaiKhoan = String.format("%02d%02d%02d%04d",
                 LocalDate.now().getDayOfMonth(),
                 LocalDate.now().getMonthValue(),
                 LocalDate.now().getYear(),
                 dem++);
+    }
+
+    public KhachHang() {
+
     }
 
     // Dùng cho việc ghi File
@@ -101,12 +102,45 @@ public class KhachHang {
         this.DanhSachTaiKhoan.add(tk);
     }
 
-    public void guiTienTaiKhoan(double money) {
-
+    // Khi gửi và rút tiền cần biết KhachHang đang gửi hoặc rút với TaiKhoan nào
+    public boolean isTaiKhoanCuaKhachHang(int maTaiKhoan) {
+        return this.DanhSachTaiKhoan.stream().anyMatch(x -> x.getMaTaiKhoan() == maTaiKhoan);
     }
 
-    public void rutTienTaiKhoan(double money) {
+    public TaiKhoan layTaiKhoanDuaTrenMaTaiKhoan(int maTaiKhoan) {
+        return this.DanhSachTaiKhoan.stream().filter(x -> x.getMaTaiKhoan() == maTaiKhoan).findFirst().orElse(null);
+    }
 
+    private void xoaTaiKhoanDuaTrenMaSoTaiKhoan(int maTaiKhoan) {
+        this.DanhSachTaiKhoan.removeIf(tk -> tk.getMaTaiKhoan() == maTaiKhoan);
+    }
+
+    public TaiKhoan layTaiKhoanKhongKyHan() {
+        return this.DanhSachTaiKhoan.stream().filter(x -> x instanceof TaiKhoanKhongKyHan).findFirst().orElse(null);
+    }
+
+    public void chuyenTienTuTKCoKyHanSangTkKhongKyHan(TaiKhoan tk, double soTienRut) {
+        //Cộng tiền vào TaiKhongKhongKyHan
+        TaiKhoan taiKhoanKhongKyHan = this.layTaiKhoanKhongKyHan();
+
+        long soNgayGui = tk.ngayGui.until(LocalDate.now(), ChronoUnit.DAYS);
+        double laiSuatNgay = CauHinh.LAI_SUAT_KHONG_KY_HAN / 365.0;
+
+        double tienGocCongLai = (tk.soTienGui - soTienRut) + (tk.soTienGui - soTienRut) * laiSuatNgay * soNgayGui;
+        System.out.println(tienGocCongLai);
+
+        taiKhoanKhongKyHan.setSoTienGui(taiKhoanKhongKyHan.getSoTienGui() + tienGocCongLai);
+
+        //Xóa TaiKhoanCoKyHan
+        this.xoaTaiKhoanDuaTrenMaSoTaiKhoan(tk.getMaTaiKhoan());
+    }
+
+    public void guiTienTaiKhoan(TaiKhoan tk, double money) {
+        tk.guiTien(money);
+    }
+
+    public void rutTienTaiKhoan(TaiKhoan tk, double money) {
+        tk.rutTien(money);
     }
 
     public void xuatDanhSachTaiKhoan() {
@@ -140,14 +174,15 @@ public class KhachHang {
             String[] tkInfo = khachHangInFo[i].split(",");
 
             String loaiTK = tkInfo[0];
-            double soTienGui = Double.parseDouble(tkInfo[1]);
-            String ngayGui = tkInfo[2];
+            int maTK = Integer.parseInt(tkInfo[1]);
+            double soTienGui = Double.parseDouble(tkInfo[2]);
+            String ngayGui = tkInfo[3];
 
             Class c = Class.forName(CauHinh.MAIN_FILE_PATH + loaiTK);
             // Tạo 1 constructor tương ứng với các tham số của class
-            Constructor<?> constructor = c.getConstructor(double.class, String.class);
+            Constructor<?> constructor = c.getConstructor(int.class, double.class, String.class);
 
-            TaiKhoan tk = (TaiKhoan) constructor.newInstance(soTienGui, ngayGui);
+            TaiKhoan tk = (TaiKhoan) constructor.newInstance(maTK, soTienGui, ngayGui);
 
             this.getDanhSachTaiKhoan().add(tk);
         }
@@ -174,8 +209,9 @@ public class KhachHang {
                 //Thông tin tài khoản của khách hàng
                 this.getDanhSachTaiKhoan().forEach(tk -> {
                     try {
-                        writer.write(String.format(" - %s,%.3f,%s",
+                        writer.write(String.format(" - %s,%d,%.3f,%s",
                                 tk.getTen(),
+                                tk.getMaTaiKhoan(),
                                 tk.getSoTienGui(),
                                 tk.getNgayGui().format(DateTimeFormatter.ofPattern(CauHinh.DATE_FORMAT))
                         ));
@@ -191,10 +227,6 @@ public class KhachHang {
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
-    }
-
-    public boolean isToiThieu50VND() {
-        return false;
     }
 
     public String getMaSoTaiKhoan() {
@@ -247,10 +279,6 @@ public class KhachHang {
 
     public void setHoTen(String hoTen) {
         this.hoTen = hoTen;
-    }
-
-    public void setDanhSachTaiKhoan(List<TaiKhoan> DanhSachTaiKhoan) {
-        this.DanhSachTaiKhoan = DanhSachTaiKhoan;
     }
 
 }

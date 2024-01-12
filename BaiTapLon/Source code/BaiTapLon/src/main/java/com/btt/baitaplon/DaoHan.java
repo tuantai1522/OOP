@@ -12,4 +12,5 @@ import java.time.LocalDate;
  */
 public interface DaoHan {
     LocalDate tinhNgayDaoHan();
+    boolean isDaoHan();
 }
